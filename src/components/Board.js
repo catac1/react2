@@ -1,6 +1,8 @@
-import { Table } from 'antd';
+import { current } from '@reduxjs/toolkit';
+import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Board = () => {
 
@@ -51,15 +53,31 @@ const Board = () => {
         });
     }, [rows])
 
+    const onChange = (page) => {
+        // console.log(page);
+        setPage(page);
+    };
+
     useEffect(() => {
         handleData();
-    }, []);
+    }, [page, text]);
 
     return (
         <div>
-            <Table columns={columns} dataSource={processedRows} pagination={false} onRow={onRow}
-            // We changed the dataSource so that there's no duplicate key
-            />
+
+            <Link to={`/board/write`}><Button>글쓰기</Button></Link>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Input type="text" placeholder="검색어를 입력하세요"
+                    style={{ width: 300 }}
+                    value={text} onChange={(e) => setText(e.target.value)} />
+            </div>
+
+            <Table columns={columns} dataSource={processedRows} pagination={false} onRow={onRow} />
+            <Pagination showSizeChanger={false}
+                align='center' defaultCurrent={page} total={total}
+                onChange={onChange} />
+                
         </div>
     );
 };

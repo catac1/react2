@@ -27,8 +27,11 @@ const Menu = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    // 뭐가 안된다는건지 놓쳤다.뭔가 활성화가 안된다?
+    const selectedKey = location.pathname === '/' ? '/home' : location.pathname;
     // why key has slash prefix => because location.pathname has slash prefix.
-    const [current, setCurrent] = useState(location.pathname);
+    // const [current, setCurrent] = useState(location.pathname);
+    const [current, setCurrent] = useState(selectedKey);
 
     const onClick = (e) => {
         setCurrent(e.key);
