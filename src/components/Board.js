@@ -7,7 +7,6 @@ const Board = () => {
     // 컬럼의 명칭, dataIndex는 백엔드에서 오는 키값, key는 Table을 위한 고유 키값
     const columns = [
         { title: '번호', dataIndex: 'num', key: 'num' },
-        { title: 'key', dataIndex: 'key', key: 'key' },
         { title: '제목', dataIndex: 'title', key: 'title' },
         { title: '작성자', dataIndex: 'writer', key: 'writer' },
         { title: '조회수', dataIndex: 'hit', key: 'hit' },
@@ -46,6 +45,7 @@ const Board = () => {
             return {
                 ...row,
                 key: row._id,
+                // Compact rows numbers to remove skipped row number.
                 num: total - (page - 1) * cnt - index,
             };
         });
@@ -58,7 +58,7 @@ const Board = () => {
     return (
         <div>
             <Table columns={columns} dataSource={processedRows} pagination={false} onRow={onRow}
-                rowKey={'_id'} // This is needed for warning `key must be  unique.`
+            // We changed the dataSource so that there's no duplicate key
             />
         </div>
     );
