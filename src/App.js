@@ -1,8 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import Login from './components/Login';
-import { Link, Route, Routes } from 'react-router-dom';
-import { Button, Flex } from 'antd';
+import { Route, Routes } from 'react-router-dom';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 
