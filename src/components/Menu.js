@@ -1,13 +1,43 @@
 import { Button } from 'antd';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { Menu as AntdMenu } from 'antd';
+
+//메뉴 항목
+const items = [
+    {
+        label: '홈',
+        key: '/home',
+        icon: <MailOutlined />,
+    },
+    {
+        label: '로그인',
+        key: '/login',
+        icon: <MailOutlined />,
+    },
+    {
+        label: '게시판',
+        key: '/board',
+        icon: <MailOutlined />,
+    },
+];
 
 const Menu = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // why key has slash prefix => because location.pathname has slash prefix.
+    const [current, setCurrent] = useState(location.pathname);
+
+    const onClick = (e) => {
+        setCurrent(e.key);
+        navigate(e.key);
+    };
+
     return (
         <div>
-            <h1> Menu </h1>   
-            <Link to="/"> <Button type="primary">홈화면</Button></Link>
-            <Link to="/login"> <Button type="primary">회원가입</Button></Link>
+            <AntdMenu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
         </div>
     );
 };
