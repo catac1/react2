@@ -2,7 +2,7 @@ import { current } from '@reduxjs/toolkit';
 import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Board = () => {
 
@@ -15,6 +15,8 @@ const Board = () => {
         { title: '작성일', dataIndex: 'regdate2', key: 'regdate' },
     ];
 
+    const navigate = useNavigate();
+
     const [page, setPage] = useState(1);
     const [text, setText] = useState('');
     const [cnt, setCnt] = useState(10);
@@ -23,11 +25,22 @@ const Board = () => {
 
     const onRow = (record, rowIndex) => {
         return {
-            onClick: (event) => {
-                console.log(event);
+            onClick: () => {
+                // we don't need await in this scope
+                handleHit(record._id);
             }
         };
 
+    };
+
+    // 조회수 증가
+    const handleHit = async (no) => {
+        const url = `/api/board/updatehit.json?no=${no}`;
+        const { data } = await axios.put(url);
+        console.log(data);
+        if (data.status === 200) {
+            navigate(`/board/view?no=${no}`);
+        }
     };
 
     const handleData = async () => {
@@ -73,11 +86,14 @@ const Board = () => {
                     value={text} onChange={(e) => setText(e.target.value)} />
             </div>
 
-            <Table columns={columns} dataSource={processedRows} pagination={false} onRow={onRow} />
+            <Table columns={columns} dataSource={processedRows}
+                pagination={false} size='small'
+                style={{ cursor: 'pointer' }}
+                onRow={onRow} />
             <Pagination showSizeChanger={false}
                 align='center' defaultCurrent={page} total={total}
                 onChange={onChange} />
-                
+
         </div>
     );
 };
