@@ -2,7 +2,7 @@ import { current } from '@reduxjs/toolkit';
 import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 const Board = () => {
 
@@ -17,7 +17,8 @@ const Board = () => {
 
     const navigate = useNavigate();
 
-    const [page, setPage] = useState(1);
+    const [searchParams] = useSearchParams();
+    const [page, setPage] = useState(searchParams.get('page') || 1);
     const [text, setText] = useState('');
     const [cnt, setCnt] = useState(10);
     const [rows, setRows] = useState([]); // data source
@@ -69,6 +70,7 @@ const Board = () => {
     const onChange = (page) => {
         // console.log(page);
         setPage(page);
+        navigate(`/board?page=${page}`);
     };
 
     useEffect(() => {
