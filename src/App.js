@@ -8,6 +8,7 @@ import Board from './components/Board';
 import './App.css';
 import BoardWrite from './components/BoardWrite';
 import BoardView from './components/BoardView';
+import BoardDelete from './components/BoardDelete';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/board" element={<Board />}></Route>
         <Route path="/board/write" element={<BoardWrite />}></Route>
         <Route path="/board/view" element={<BoardView />}></Route>
+        <Route path="/board/delete" element={<BoardDelete />}></Route>
       </Routes>
       <Footer />
     </div>
