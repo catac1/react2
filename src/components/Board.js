@@ -40,7 +40,7 @@ const Board = () => {
         const { data } = await axios.put(url);
         console.log(data);
         if (data.status === 200) {
-            navigate(`/board/view?no=${no}`);
+            navigate(`/board/view?no=${no}&page=${page}`);
         }
     };
 
