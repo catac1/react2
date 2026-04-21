@@ -10,6 +10,7 @@ import BoardWrite from './components/BoardWrite';
 import BoardView from './components/BoardView';
 import BoardDelete from './components/BoardDelete';
 import BoardUpdate from './components/BoardUpdate';
+import Seller from './components/Seller';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/board" element={<Board />}></Route>
+        <Route path="/seller" element={<Seller />}></Route>
         <Route path="/board/write" element={<BoardWrite />}></Route>
         <Route path="/board/view" element={<BoardView />}></Route>
         <Route path="/board/delete" element={<BoardDelete />}></Route>

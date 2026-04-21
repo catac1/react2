@@ -21,6 +21,11 @@ const items = [
         key: '/board',
         icon: <MailOutlined />,
     },
+    {
+        label: '판매자',
+        key: '/seller',
+        icon: <MailOutlined />,
+    },
 ];
 
 const Menu = () => {
