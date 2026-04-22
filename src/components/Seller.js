@@ -32,8 +32,10 @@ const Seller = () => {
         const url = `/api/item/selectlist.json?page=${page}&cnt=${cnt}&text=${text}`;
         const { data } = await axios.get(url);
         console.log(data);
-        setRows(data.result)
-        setTotal(data.result)
+        if (data.status === 200) {
+            setRows(data.result)
+            setTotal(data.result)
+        }
     };
 
     const onChange = (page) => {
@@ -55,12 +57,13 @@ const Seller = () => {
             </div>
 
             <Table columns={columns} dataSource={rows} rowKey={"_id"} pagination={false}
-            onRow={(record) => ({
-                onClick: () => {
-                    navigate(`/seller/view?code=${record._id}`);
-                }
-            })} />
-            <Pagination align='center' onChange={onChange} size='small' />
+                onRow={(record) => ({
+                    onClick: () => {
+                        navigate(`/seller/view?code=${record._id}`);
+                    }
+                })} />
+            <Pagination align='center' defaultCurrent={page} total={total}
+                onChange={onChange} size='small' />
         </div>
     );
 };
