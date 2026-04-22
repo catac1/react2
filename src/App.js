@@ -14,6 +14,7 @@ import Seller from './components/Seller';
 import ItemInsert from './components/ItemInsert';
 import ItemView from './components/ItemView';
 import Register from './components/Register';
+import ItemUpdate from './components/ItemUpdate';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/board/update" element={<BoardUpdate />}></Route>
         <Route path="/seller/write" element={<ItemInsert />}></Route>
         <Route path="/seller/view" element={<ItemView />}></Route>
+        <Route path="/seller/update" element={<ItemUpdate />}></Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
       <Footer />

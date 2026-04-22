@@ -53,6 +53,7 @@ const ItemView = () => {
             <br /><hr />
             <Link to={`/seller`}><Button size='small'>목록</Button></Link>
             <Button size='small' onClick={handleDelete}>삭제</Button>
+            <Link to={`/seller/update?code=${code}`}><Button size='small'>수정</Button></Link>
         </div >
     );
 };
