@@ -33,8 +33,8 @@ const Seller = () => {
         const { data } = await axios.get(url);
         console.log(data);
         if (data.status === 200) {
-            setRows(data.result)
-            setTotal(data.result)
+            setRows(data.result);
+            setTotal(data.total);
         }
     };
 
