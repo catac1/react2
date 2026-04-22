@@ -1,8 +1,11 @@
 import { Button, Form, Input, InputNumber, Upload } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ItemInsert = () => {
+
+    const navigate = useNavigate();
 
     const [image, setImage] = useState(null);
     const [fileList, setFileList] = useState([]);
@@ -38,6 +41,7 @@ const ItemInsert = () => {
         console.log(data);
         if ( data.status === 200 ) {
             alert('등록완료');
+            navigate('/seller');
         }
     }
 

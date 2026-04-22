@@ -12,6 +12,7 @@ import BoardDelete from './components/BoardDelete';
 import BoardUpdate from './components/BoardUpdate';
 import Seller from './components/Seller';
 import ItemInsert from './components/ItemInsert';
+import ItemView from './components/ItemView';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/board/delete" element={<BoardDelete />}></Route>
         <Route path="/board/update" element={<BoardUpdate />}></Route>
         <Route path="/seller/write" element={<ItemInsert />}></Route>
+        <Route path="/seller/view" element={<ItemView />}></Route>
       </Routes>
       <Footer />
     </div>

@@ -1,9 +1,11 @@
 import { Button, Input, Pagination, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Seller = () => {
+
+    const navigate = useNavigate();
 
     const columns = [
         { title: '번호', dataIndex: '_id', key: 'code' },
@@ -52,7 +54,12 @@ const Seller = () => {
                     value={text} onChange={(e) => setText(e.target.value)} />
             </div>
 
-            <Table columns={columns} dataSource={rows} rowKey={"_id"} />
+            <Table columns={columns} dataSource={rows} rowKey={"_id"} pagination={false}
+            onRow={(record) => ({
+                onClick: () => {
+                    navigate(`/seller/view?code=${record._id}`);
+                }
+            })} />
             <Pagination align='center' onChange={onChange} size='small' />
         </div>
     );
