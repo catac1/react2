@@ -10,74 +10,57 @@ const Register = () => {
             console.log(data);
             alert('회원가입 완료');
         }
+
     };
     return (
         <div>
             <h1> 회원 가입 </h1>
-            <Form
-                onFinish={onFinish}
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 20 }}
-                style={{ maxWidth: 600 }}>
+            <Form>
                 <Form.Item
+                    name="id"
                     label="아이디"
-                    name="username"
-                    rules={[{ required: true, message: '아이디를 입력하세요!' }]}
-                >
-                    <Input />
+                    rules={{ required: true, message: "아이디를 입력하세요" }}>
+                    <Input placeholder='아이디를 입력하세요' />
                 </Form.Item>
 
                 <Form.Item
-                    label="암호"
                     name="password"
-                    rules={[{ required: true, message: '암호를 입력하세요!' }]}
-                >
+                    label="암호"
+                    rules={{ required: true }}>
                     <Input.Password />
                 </Form.Item>
 
                 <Form.Item
-                    label="암호확인"
                     name="passwordConfirm"
+                    label="암호확인"
                     dependencies={['password']}
-                    rules={[
-                        { required: true, message: '암호를 확인하세요!' },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(new Error('암호가 일치하지 않습니다!'));
-                            },
-                        }),
-                    ]}
-                >
+                    rules={{ required: true }}>
                     <Input.Password />
                 </Form.Item>
 
-
                 <Form.Item
-                    label="나이"
                     name="age"
-                    rules={[{ required: true, message: '나이를 입력하세요!' }]}
-                >
-                    <InputNumber />
+                    label="나이"
+                    rules={{ required: true, message: "나이를 입력하세요" }}>
+                    <InputNumber placeholder='나이' />
                 </Form.Item>
 
-
                 <Form.Item
-                    label="이름"
                     name="name"
-                    rules={[{ required: true, message: '이름을 입력하세요!' }]}
-                >
-                    <Input />
+                    label="이름"
+                    rules={{ required: true, message: "이름을 입력하세요" }}>
+                    <InputNumber placeholder='이름' />
                 </Form.Item>
 
-
                 <Form.Item
-                    wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
-                        회원가입
-                    </Button>
+                    name="email"
+                    label="이메일"
+                    rules={{ required: true, message: "이메일을 입력하세요" }}>
+                    <Input placeholder='이메일' />
+                </Form.Item>
+
+                <Form.Item>
+                    <Button type="primary" htmlType='submit'> 회원가입 </Button>
                 </Form.Item>
             </Form>
         </div>
