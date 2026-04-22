@@ -45,7 +45,7 @@ const Seller = () => {
     return (
         <div>
             <h1> 판매자 </h1>
-            <Link to={`seller/write`}><Button>물품등록</Button></Link>
+            <Link to={`/seller/write`}><Button>물품등록</Button></Link>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Input type="text" placeholder="검색어를 입력하세요"
                     style={{ width: 300 }}
