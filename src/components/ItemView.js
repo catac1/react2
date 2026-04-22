@@ -1,9 +1,11 @@
 import { Button, Image } from 'antd';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 const ItemView = () => {
+
+    const navigate = useNavigate();
 
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
@@ -20,11 +22,16 @@ const ItemView = () => {
     }, [code]);
 
     const handleDelete = async () => {
-        const url = `/api/foo.json?=${code}`;
-        const { data } = await axios.put(url);
+        if (!window.confirm('삭제할까요?')) {
+            return;
+        }
+        const url = `/api/item/delete.json`;
+        const body = { no: code };
+        const { data } = await axios.delete(url, { data: body });
         console.log(data);
         if (data.status === 200) {
-            alert('물품이 삭제되었습니다.')
+            alert('삭제 완료')
+            navigate('/seller');
         }
     };
 
