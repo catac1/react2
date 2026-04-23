@@ -17,6 +17,10 @@ import Register from './components/Register';
 import ItemUpdate from './components/ItemUpdate';
 import { useSelector } from 'react-redux';
 import Logout from './components/Logout';
+import Mypage from './components/Mypage';
+import MemberUpdate from './components/mypage/MemberUpdate';
+import MemberPassword from './components/mypage/MemberPassword';
+import MemberDelete from './components/mypage/MemberDelete';
 
 const App = () => {
 
@@ -51,6 +55,11 @@ const App = () => {
                 <Route path="/seller/view" element={<ItemView />}></Route>
                 <Route path="/seller/update" element={<ItemUpdate />}></Route>
                 <Route path="/register" element={<Register />}></Route>
+                <Route path="/mypage" element={<Mypage />}>
+                    <Route path="update" element={<MemberUpdate />} />
+                    <Route path="password" element={<MemberPassword />} />
+                    <Route path="delete" element={<MemberDelete />} />
+                </Route>
             </Routes>
             <Footer title="footer" copyright="@2026 copyright" handleClick={handleClick} />
         </div>

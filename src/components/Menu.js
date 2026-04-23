@@ -54,6 +54,11 @@ const loginMenus = [
         key: "/logout",
         icon: <MailOutlined />
     },
+    {
+        label: "마이페이지",
+        key: "/mypage",
+        icon: <MailOutlined />
+    },
 ];
 
 let items = logoutMenus;
