@@ -15,35 +15,44 @@ import ItemInsert from './components/ItemInsert';
 import ItemView from './components/ItemView';
 import Register from './components/Register';
 import ItemUpdate from './components/ItemUpdate';
-  
+import { useSelector } from 'react-redux';
+
 const App = () => {
 
-  const handleClick = () => {
-    alert("버튼 클릭됨");
-  };
+    const { logged, token, counter } = useSelector((state) => state.LoggedReducer);
 
-  return (
-    <div className='App'>
-      <Menu />
-      <Routes>
-        {/* <Route path="/" element={<Home />}></Route> <= this also works without changing url */}
-        <Route path="/" element={<Navigate to="/home" replace />}></Route>        
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/board" element={<Board />}></Route>
-        <Route path="/seller" element={<Seller />}></Route>
-        <Route path="/board/write" element={<BoardWrite />}></Route>
-        <Route path="/board/view" element={<BoardView />}></Route>
-        <Route path="/board/delete" element={<BoardDelete />}></Route>
-        <Route path="/board/update" element={<BoardUpdate />}></Route>
-        <Route path="/seller/write" element={<ItemInsert />}></Route>
-        <Route path="/seller/view" element={<ItemView />}></Route>
-        <Route path="/seller/update" element={<ItemUpdate />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-      </Routes>
-      <Footer title="footer" copyright="@2026 copyright" handleClick={handleClick}/>
-    </div>
-  );
+    const handleClick = () => {
+        alert("버튼 클릭됨");
+    };
+
+    return (
+        <div className='App'>
+            <p>로그인 상태: {logged}</p>
+            <p>토큰 {token}</p>
+            <p>카운터: {counter}</p>
+            <hr />
+
+            <Menu />
+
+            <Routes>
+                {/* <Route path="/" element={<Home />}></Route> <= this also works without changing url */}
+                <Route path="/" element={<Navigate to="/home" replace />}></Route>
+                <Route path="/home" element={<Home />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/board" element={<Board />}></Route>
+                <Route path="/seller" element={<Seller />}></Route>
+                <Route path="/board/write" element={<BoardWrite />}></Route>
+                <Route path="/board/view" element={<BoardView />}></Route>
+                <Route path="/board/delete" element={<BoardDelete />}></Route>
+                <Route path="/board/update" element={<BoardUpdate />}></Route>
+                <Route path="/seller/write" element={<ItemInsert />}></Route>
+                <Route path="/seller/view" element={<ItemView />}></Route>
+                <Route path="/seller/update" element={<ItemUpdate />}></Route>
+                <Route path="/register" element={<Register />}></Route>
+            </Routes>
+            <Footer title="footer" copyright="@2026 copyright" handleClick={handleClick} />
+        </div>
+    );
 };
 
 export default App;

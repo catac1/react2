@@ -3,12 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from '@reduxjs/toolkit';
+import LoggedReducer from './reducers/LoggedReducer';
+
+// router
 import { BrowserRouter } from 'react-router-dom';
 
+// redux
+import { Provider } from 'react-redux';
+import store from './store';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <BrowserRouter>
-    <App />
+  <BrowserRouter> 
+   {/* store는 router 보다 안쪽으로 들어가야 동작 */}
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

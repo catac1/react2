@@ -1,10 +1,13 @@
 import { Button, Form, Input } from 'antd';
 import axios from 'axios';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    
+
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
 
     const onFinish = async (values) => {
@@ -13,11 +16,11 @@ const Login = () => {
         const body = values;
         const { data } = await axios.post(url, body);
         console.log(data);
-        if ( data.status === 200 ) {
+        if (data.status === 200) {
+            dispatch({ type: 'LOGIN', payload: data.token });
             alert('로그인 성공');
             navigate('/home');
         }
-
     }
     return (
         <div>
