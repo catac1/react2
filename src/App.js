@@ -16,6 +16,7 @@ import ItemView from './components/ItemView';
 import Register from './components/Register';
 import ItemUpdate from './components/ItemUpdate';
 import { useSelector } from 'react-redux';
+import Logout from './components/Logout';
 
 const App = () => {
 
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path="/" element={<Navigate to="/home" replace />}></Route>
                 <Route path="/home" element={<Home />}></Route>
                 <Route path="/login" element={<Login />}></Route>
+                <Route path="/logout" element={<Logout />}></Route>
                 <Route path="/board" element={<Board />}></Route>
                 <Route path="/seller" element={<Seller />}></Route>
                 <Route path="/board/write" element={<BoardWrite />}></Route>

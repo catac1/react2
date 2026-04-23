@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    const dispatch = useDispatch();
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const onFinish = async (values) => {
         console.log(values);
@@ -17,8 +16,8 @@ const Login = () => {
         const { data } = await axios.post(url, body);
         console.log(data);
         if (data.status === 200) {
-            dispatch({ type: 'LOGIN', payload: data.token });
             alert('로그인 성공');
+            dispatch({ type: 'LOGIN', payload: data.token });
             navigate('/home');
         }
     }
