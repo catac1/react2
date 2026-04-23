@@ -8,7 +8,7 @@ const MemberPassword = () => {
     const navigate = useNavigate();
     
     const onFinish = async (values) => {
-        const url = `/member/password.json`;
+        const url = `/member/updatepw.json`;
         const { data } = await api.put(url, values);
         console.log(data);
         if (data.status === 200) {
@@ -25,14 +25,14 @@ const MemberPassword = () => {
             <Form onFinish={onFinish}>
                 <Form.Item
                     label="이전 암호"
-                    name="oldPassword"
+                    name="password"
                     rules={[{ required: true }]}
                 >
-                    <Input.Password label />
+                    <Input.Password />
                 </Form.Item>
                 <Form.Item
                     label="새 암호"
-                    name="newPassword"
+                    name="password1"
                     rules={[{ required: true }]}
                 >
                     <Input.Password />
@@ -40,17 +40,17 @@ const MemberPassword = () => {
                 <Form.Item
                     label="암호 확인"
                     name="password2"
-                    dependencies={['password']}
+                    dependencies={['password1']}
                     rules={[
                         {
                             required: true,
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
+                                if (!value || getFieldValue('password1') === value) {
+                                    return Promise.resolve();   
                                 }
-                                return Promise.reject(new Error('The new password that you entered do not match!'));
+                                return Promise.reject(new Error('패스워드가 일치하지 않습니다!'));
                             },
                         }),
                     ]}
@@ -59,7 +59,7 @@ const MemberPassword = () => {
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">암호 변경</Button>
-                </Form.Item>
+                </Form.Item> 
             </Form>
         </div>
     );
