@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Footer = () => {
+const Footer = (props) => {
+    console.log(props);
+    const { title, copyright, handleClick } = props;
+
+    
     return (
         <div>
             <hr />
-
-            <p>
-                여기는 footer 내용이 들어 갈 것입니다. 
-            </p>
+            <p> {title}</p>
+            <p> {copyright} </p>
+            <button onClick={handleClick}>Click</button>
         </div>
     );
 };

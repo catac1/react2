@@ -15,8 +15,13 @@ import ItemInsert from './components/ItemInsert';
 import ItemView from './components/ItemView';
 import Register from './components/Register';
 import ItemUpdate from './components/ItemUpdate';
-
+  
 const App = () => {
+
+  const handleClick = () => {
+    alert("버튼 클릭됨");
+  };
+
   return (
     <div className='App'>
       <Menu />
@@ -36,7 +41,7 @@ const App = () => {
         <Route path="/seller/update" element={<ItemUpdate />}></Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
-      <Footer />
+      <Footer title="footer" copyright="@2026 copyright" handleClick={handleClick}/>
     </div>
   );
 };
