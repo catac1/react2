@@ -11,13 +11,16 @@ const LoggedReducer = (state = initialState, action) => {
 
         // dispatch({type:"LOGIN", payload: 토큰})
         case "LOGIN":
+            sessionStorage.setItem("token", action.payload);
             return {
                 ...state,
                 logged: 1,
                 counter: state.counter + 1,
                 token: action.payload,
             };
+        // dispatch({type:"LOGOUT"})
         case "LOGOUT":
+            sessionStorage.removeItem("token");
             return {
                 ...state,
                 logged: 0,
@@ -25,6 +28,13 @@ const LoggedReducer = (state = initialState, action) => {
                 token: "",
             };
         default:
+            if ( sessionStorage.getItem("token")) {
+                return {
+                    ...state,
+                    logged: 1,
+                    token: sessionStorage.getItem("token"),
+                };
+            }
             return state;
     }
 };
