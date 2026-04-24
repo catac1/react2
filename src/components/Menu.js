@@ -31,6 +31,11 @@ const logoutMenus = [
         key: '/register',
         icon: <MailOutlined />,
     },
+    {
+        label: '실시간채팅',
+        key: '/chat',
+        icon: <MailOutlined />,
+    },
 ];
 
 const loginMenus = [
@@ -66,7 +71,7 @@ let items = logoutMenus;
 const Menu = () => {
     //메뉴 항목
     const { logged } = useSelector((state) => state.LoggedReducer);
-    // 로그아웃 상태 (5개)
+    // 로그아웃 상태 (6개)
     if (logged === 0) {
         items = logoutMenus;
     }

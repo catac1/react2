@@ -21,6 +21,7 @@ import Mypage from './components/Mypage';
 import MemberUpdate from './components/mypage/MemberUpdate';
 import MemberPassword from './components/mypage/MemberPassword';
 import MemberDelete from './components/mypage/MemberDelete';
+import Chat from './components/Chat';
 
 const App = () => {
 
@@ -60,6 +61,7 @@ const App = () => {
                     <Route path="password" element={<MemberPassword />} />
                     <Route path="delete" element={<MemberDelete />} />
                 </Route>
+                <Route path="/chat" element={<Chat />}></Route>
             </Routes>
             <Footer title="footer" copyright="@2026 copyright" handleClick={handleClick} />
         </div>
