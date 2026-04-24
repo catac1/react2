@@ -1,4 +1,5 @@
 import { Button, Form, Input } from 'antd';
+import axios from 'axios';
 import mqtt from 'mqtt';
 import React, { useEffect, useState } from 'react';
 
@@ -6,6 +7,31 @@ const Chat = () => {
 
     const [mqttClient, setMqttClient] = useState(null);
     const [output, setOutput] = useState([]);
+
+    const handleMessage = async () => {
+        // 이전 채팅 메세지 서버로 부터 가져오기
+        // _id 기준 이후로 가져옴 _id는 메세지가 생성될때 마다 증가 하고 _id가 0일 경우 모두 가져옴.
+        // %23은 #캐릭터의 url 인코딩된 값
+        const topic = encodeURIComponent('class207/#');
+        console.log(topic);
+        const url = `/api/message/select.json?_id=${0}&topic=${topic}`;
+        const { data } = await axios.get(url);
+        console.log(data);
+
+        // for (let i = 0; i < data.result.length; i++) {
+        //     setOutput(prev => [...prev, {
+        //         topic: data.result[i].publisher,
+        //         message: data.result[i].content,
+        //         timestamp: data.result[i].regdate,
+        //     }]);
+        // }
+        const newEntries = data.result.map(item => ({
+            topic: item.publisher,
+            message: item.content,
+            timestamp: item.regdate,
+        }));
+        setOutput(prev => [...newEntries, ...prev]);
+    }
 
     useEffect(() => {
         const client = mqtt.connect("ws://192.168.0.7:19001", {
@@ -15,6 +41,7 @@ const Chat = () => {
         });
 
         setMqttClient(client);
+        handleMessage();
 
         client.on("connect", () => {
             console.log("연결 성공");
@@ -35,7 +62,7 @@ const Chat = () => {
             client.reconnect();
         });
 
-        // Clean up function for useEffect. When the clean up function runs?ㅋ
+        // Clean up function for useEffect. When the clean up function runs?
         // 1. Before the effect runs again
         // 2. After the component unmounts
         return () => {
@@ -55,10 +82,21 @@ const Chat = () => {
         }
     }, [mqttClient]);
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log(values);
         if (mqttClient) {
-            mqttClient.publish("class207/cid1", JSON.stringify(values));
+            const url = "/api/message/insert.json";
+
+            values.topic = "class207/#";
+            values.publisher = "class207/cid1";
+            values.content = values.message;
+
+            const { data } = await axios.post(url, values);
+            console.log(data);
+
+            if (data.status === 200) {
+                mqttClient.publish("class207/cid1", JSON.stringify(values));
+            }
         }
     };
 
